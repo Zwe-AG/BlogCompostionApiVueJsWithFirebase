@@ -1,18 +1,19 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <PostsList :posts="posts"></PostsList>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import { ref } from "@vue/reactivity"
+import PostsList from '../components/PostsList'
+import getPosts from '../composables/getPosts'
 export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
+  components: { PostsList },
+  setup(props) {
+     let {posts,error,getData} = getPosts();
+     getData();
+     return {posts,error};
   }
 }
 </script>
